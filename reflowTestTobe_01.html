@@ -13,18 +13,18 @@
       </div>
   </div>
   <script>
-    function changeDivStyle(){
-      var sampleEl = document.getElementById('sample'),
-          clone = sampleEl.cloneNode(true);
-          clone.style.left = '200px';
-          clone.style.width = '200px';
-          clone.style.backgroundColor = 'blue';
-          document.getElementById('container').replaceChild(clone,sampleEl);
-    }
     // function changeDivStyle(){
-    //   var sampleEl = document.getElementById('sample');
-    //       sampleEl.style.cssText = 'position:absolute;background:blue;width:200px;height:50px;left:200px';
+    //   var sampleEl = document.getElementById('sample'),
+    //       clone = sampleEl.cloneNode(true);
+    //       clone.style.left = '200px';
+    //       clone.style.width = '200px';
+    //       clone.style.backgroundColor = 'blue';
+    //       document.getElementById('container').replaceChild(clone,sampleEl);
     // }
+    function changeDivStyle(){
+      var sampleEl = document.getElementById('sample');
+          sampleEl.style.cssText = 'position:absolute;background:blue;width:200px;height:50px;left:200px';
+    }
     changeDivStyle();
   </script>
 </body>

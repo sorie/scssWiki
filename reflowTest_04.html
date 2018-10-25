@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+     //***********************************************//
+    var el = document.getElementById('reflow-test');
+
+    el.style.padding = '8px';
+    el.style.width = '320px';
+    el.style.height = '240px';
+    //--3번의 리플로우 발생 //
+
+    //***********************************************//
+    var el = document.getElementById('reflow-test');
+    el.style.cssText = 'padding: 8px; width: 320px; height: 240px';
+    // or //
+    el.className = 'changed';
+    //--1번의 리플로우 발생 //
+    //***********************************************//
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #reflow-test{border:1px solid red;}
+  </style>
+</head>
+<body>
+  <ul id="reflow-test">
+    <li>reflow</li>
+    <li>reflow</li>
+    <li>reflow</li>
+    <li>reflow</li>
+  </div>
+  <script>
+    // 캐쉬를 활용한 Reflow 최소화.
+    //-브라우저는 레이아웃 변경을 큐에 저장했다가 한 번에 실행함으로써 리플로우를 최소화하는데, 
+    //offset,scrollTop 과 같은 계산된 스타일 정보를 요청할 때마다 
+    //정확한 정보를 제공하기 위해 큐를 비우고, 모든 변경을 다시 적용한다. 
+    //-이를 최소화하기 위해 수치에 대한 스타일 정보를 변수에 저장하여 정보 요청 횟수를
+    //줄임으로써 리플로우를 최소화한다. 
+    const el = document.getElementsByTagName('li');
+    const len = el.length;
+
+    console.log(len);
+
+    let ttop = el.offsetTop, lleft = el.offsetLeft, elStyle = el.style;
+
+    // for(let i = 0; i < len; i++){
+    //   el.style.top = `${el.offsetTop + 10}px`;
+    //   el.style.left = `${el.offsetLeft + 10}px`;
+    // }
+    //Bad practice
+
+    for(let i =0; i < len; i++){
+      ttop += 10;
+      lleft += 10;
+      elStyle.top = `${ttop}px`;
+      elStyle.left = `${lleft}px`;
+    }
+    // Good practice
+  </script>
+</body>
+</html>
