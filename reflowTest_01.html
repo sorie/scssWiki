@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="container">
+      <div id="sample" style="position:absolute;background:red;width:150px;height:50px;">
+        Sample Box
+      </div>
+  </div>
+  <script>
+    function changeDivStyle(){
+      var sampleEl = document.getElementById('sample');
+      sampleEl.style.left = '200px';
+      sampleEl.style.width = '200px';
+      sampleEl.style.backgroundColor = 'blue';
+    }
+    changeDivStyle();
+  </script>
+</body>
+</html>
