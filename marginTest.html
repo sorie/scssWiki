@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+  <!-- <script src="main.js"></script> -->
+  <style lang="ko">
+    /* 01현상 : 위아래 마진이 겹침 (정상) */
+    /* .section {background-color:azure;border:1px solid #ddd;margin:20px;padding:20px;} */
+    
+    /* 02현상 : parents의 마진 0과 겹쳐짐.(비정상적인 마진병합현상) */
+    .parents{background-color:aliceblue;width:300px;margin:0 auto;}
+    /* 해결방법 01 */
+    .parents{background-color:aliceblue;width:300px;margin:0 auto;overflow: hidden;}
+    /* 해결방법 02 */
+    /* .parents{background-color:aliceblue;width:300px;margin:0 auto;border:1px solid transparent;} */
+    .children{background-color:blanchedalmond;margin:50px;}
+  </style>
+</head>
+<body>
+  <!-- ****마진병합현상의 조건 ***********
+  *****인접해있는 Block요소끼리만 일어난다.
+  *****상하단만 해당사항
+  *********************************  -->
+
+  <!-- 01현상 -->
+  <!-- <section class="section">section01</section>
+  <section class="section">section02</section> -->
+
+  <!-- 02현상 -->
+  <div class="parents">
+    <div class="children">A</div>
+    <div class="children">B</div>
+  </div>
+</body>
+</html>

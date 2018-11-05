@@ -1,0 +1,113 @@
+@charset 'utf8';
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower|Poor+Story');
+
+/// 맵의 최대 깊이를 계산한다
+/// @param {Map} $map
+/// @return {Number} `$map`의 최대 깊이
+@function map-depth($map) {
+  $level: 1;
+
+  @each $key, $value in $map {
+    @if type-of($value) == 'map' {
+      $level: max(map-depth($value) + 1, $level);
+    }
+  }
+
+  @return $level;
+}
+
+/// 반응형 매니저
+/// @access public
+/// @param {String} $breakpoint - 브레이크포인트
+/// @requires $breakpoints
+@mixin respond-to($breakpoint) {
+  $raw-query: map-get($breakpoints, $breakpoint);
+
+  @if $raw-query {
+    $query: if(
+      type-of($raw-query) == 'string',
+      unquote($raw-query),
+      inspect($raw-query)
+    );
+
+    @media #{$query} {
+      @content;
+    }
+  } @else {
+    @error 'No value found for `#{$breakpoint}`. '
+         + 'Please make sure it is defined in `$breakpoints` map.';
+  }
+}
+
+
+//변수선언
+$screenW : 320;
+$headerH : 'Poor Story', '맑은고딕';
+$contentH : 'Indie Flower','Poor Story', '맑은고딕';
+$footerH : 'Poor Story', '맑은고딕';
+$h1 : 20px;
+$breakpoints: (
+  'seed': (min-width: 800px),
+  'sprout': (min-width: 1000px),
+  'plant': (min-width: 1200px),
+);
+
+/// 내부 float을 해제하는 헬퍼
+/// @author Nicolas Galloagher
+/// @link http://nicolasgallagher.com/micro-clearfix-hack/ Micro Clearfix
+@mixin clearfix {
+  &::after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+@function vw($px, $view: $screenW) {
+  @return #{($px / $view ) * 100}vw;
+}
+@function viewRatio16-9H($w){
+  @return (9*$w) / 16;
+}
+@function viewRatio16-9W($h){
+  @return (16*$h) / 9;
+}
+
+.header {
+  text-decoration:none;list-style:none;
+  padding:vw($px: 20);font-family:$headerH;
+  .title{padding-top:vw($px: 30);padding-bottom:vw($px: 30);font-size:$h1;text-align:center}
+  .nav {
+    float:right;
+    li{
+      display:inline-block;
+      &:after{
+        content:'|';
+        padding: 0 5px;
+      }
+      &:last-child{
+        &:after{
+          content:'';
+          padding: 0;
+        }
+      }
+      a{text-decoration: none;}
+    }
+  }
+}
+.section {
+  padding:vw($px: 5) vw($px: 20);
+  font-family:$contentH;
+}
+.footer {
+  padding:vw($px: 20);
+  font-family:$footerH;
+  text-align: center;
+  color: #ddd;
+  @include respond-to('seed') {
+    color: blueviolet;
+  }
+}
+
+
+
